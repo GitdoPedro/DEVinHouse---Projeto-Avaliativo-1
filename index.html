@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="formulario.css" media="screen">
+    <title>DevinKNOWLOEDGE</title>
+</head>
+<body>
+    <main>
+        
+        <form>
+            <h1>DevinKNOWLOEDGE</h1>
+            <h4>Learn,Code and Save</h4>
+            <fieldset>
+                <legend>Preencha aqui os dados</legend>
+
+                <label for="titulo"><strong>Título</strong></label>
+                <input type="text" name="titulo" id="titulo" required minlength="8" maxlength="64" placeholder="Digite aqui um título" >
+
+                <label for="skill"><strong>Linguagem/Skill</strong></label>
+                <input type="text" name="skill" id="skill" required minlength="2" maxlength="16" placeholder="Digite uma linguagem ou skill" >
+
+                <label for="categoria"><Strong>Categoria</Strong></label>
+                <select id="categoria" name="categoria">
+                <option value="0">FrontEnd</option>
+                <option value="1">BackEnd</option>
+                <option value="2">FullStack</option>
+                <option value="3">SoftSkill</option>
+                </select>
+
+                <label for="descrição"><strong>Descrição</strong></label>
+                <textarea name="descrição" id="descrição" required minlength="16" maxlength="512" placeholder="Escreva aqui o detalhamento da sua dica..." rows="4" cols="50"></textarea>
+
+                <label for="youtube"><strong>Vídeo do YouTube</strong></label>
+                <input type="text" name="youtube" id="youtube"  placeholder="https://suaurl.com">
+
+                <p>
+                    <input type="button" value="Limpar" id="btLimpar">
+                    <input type="button" value="Salvar" id="btSalvar">
+                </p>
+            </fieldset>
+
+        </form>
+
+
+        <div>
+            <h1>GRID</h1>
+
+        </div>
+
+
+
+    </main>
+
+</body>
+</html>
