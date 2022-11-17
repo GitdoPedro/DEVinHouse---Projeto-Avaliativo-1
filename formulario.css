@@ -41,8 +41,16 @@ h4{
     margin-bottom: 50px;
 }
 form {
+    
     display:flex;
     flex-direction: column;
+    position: absolute;
+    width: 576px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+    
+    
 }
 
 fieldset {
@@ -55,5 +63,33 @@ fieldset {
     margin-right: 1em;
     border: 1px groove ;
     padding: 20px;
+    background-color:aquamarine;
+ 
 }
 
+div{
+    position: absolute;
+    width: 864px;
+    height: 1024px;
+    left: 576px;
+    top: 0px;
+    background: #F6F7F9;
+}
+
+.contador{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cardContador{
+    
+    width: 150px;
+    height: 100px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+}
