@@ -1,37 +1,9 @@
-const frm = document.querySelector("form") 
-
-
+import contadorCategoria from "./contador.js"
+import cadastroDicas    from "./cadastroDicas.js"
+const frm = document.querySelector('form') 
+const card = document.getElementById('card')
+card.innerHTML = ''
 const cadastroDedicas = []
-
-class contadorCategoria  { //migrar para outro script
-    constructor(){
-    this.FrontEnd  =  0,
-    this.BackEnd   =  0,
-    this.FullStack =  0,
-    this.SoftSkill =  0,
-    this.total     =  0
-}
-
-    incrementaContador(categoria){
-        this.total+=1
-        switch(categoria) {
-            case 0:
-                this.FrontEnd+=1
-                break
-            case 1:
-                this.BackEnd+=1
-                break
-            case 2:
-                this.FullStack+=1
-                break
-            case 3:
-                this.SoftSkill+=1
-                break
-          }
-
-    }
-
-}
 const categorias = new contadorCategoria()
 
 
@@ -45,7 +17,7 @@ function validaURLYoutube(url) {
 }
 
 function selecionaCategoria(option){
-    categorias.incrementaContador(option)
+    
     switch(option) {
         case 0:
             return 'FrontEnd'
@@ -62,23 +34,76 @@ function selecionaCategoria(option){
       }
 }
 
+
+const criarElementosCard = (tag, conteudo) =>{
+    const elemento = document.createElement(tag)
+    elemento.innerText = conteudo
+    return elemento
+}
+
+function carregaCard(cadastro) {
+
+    
+
+    const li = document.createElement('li')
+    const container = document.createElement('div')
+    const dados = document.createElement('div')
+    const botoes = document.createElement('p')
+
+    li.classList.add('cartao')
+    container.classList.add('container')
+    dados.classList.add('dados')
+    botoes.classList.add('botoesCard')
+
+
+
+    const titulo = criarElementosCard('h2',cadastro.titulo)
+    const skill = criarElementosCard('p',`Linguagem/Skill: ${cadastro.linguagem}`)
+    const categoria = criarElementosCard('p',`Categoria:   ${cadastro.categoria}`)
+    const descricao = criarElementosCard('p',cadastro.descricao)
+    if (cadastro.url) {const url = criarElementosCard('button')}
+    
+        
+    dados.appendChild(titulo)
+    dados.appendChild(skill)
+    dados.appendChild(categoria)
+    dados.appendChild(descricao)
+    container.appendChild(dados)
+    li.appendChild(container)
+    card.appendChild(li)
+
+    console.log(card)
+
+    
+}
+
 frm.btSalvar.addEventListener("click", () => {
 
     const titulo    = frm.inTitulo.value
     const skill     = frm.inSkill.value
-    const categoria = Number(document.querySelector('option:checked').value,categorias)
+    const categoria = Number(document.querySelector('option:checked').value)
     const descricao = frm.inDescricao.value
     const url       = validaURLYoutube(frm.inUrl.value)? frm.inUrl.value : null
+    url == null ? alert("Cadastro efetuado sem url") : alert("Cadastro efetuado com sucesso!") 
     categorias.incrementaContador(categoria)
-    console.log(categorias.FrontEnd)
     
-    //mudar pra outra função depois ex: função atualizaTela
+    
+    
+    //Atualiza o contador
 
     document.querySelector("#OutTotal").innerText = categorias.total
     document.querySelector("#OutFrontEnd").innerText = categorias.FrontEnd
     document.querySelector("#OutBackEnd").innerText = categorias.BackEnd
     document.querySelector("#OutFullStack").innerText = categorias.FullStack
     document.querySelector("#OutSkill").innerText = categorias.SoftSkill
+
+    //Adiciona elemento ao array de cadastros
+
+    let cadastroTemporario = new cadastroDicas(titulo,skill,selecionaCategoria(categoria),descricao,url)
+
+    cadastroDedicas.push(cadastroTemporario)
+    carregaCard(cadastroTemporario)
+
 
 })
 

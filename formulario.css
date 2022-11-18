@@ -51,6 +51,7 @@ form {
     top: 0px;
     
     
+    
 }
 
 fieldset {
@@ -64,21 +65,32 @@ fieldset {
     border: 1px groove ;
     padding: 20px;
     background-color:aquamarine;
+    margin-top: 45px;
  
 }
 
 div{
-    position: absolute;
+    
     width: 864px;
     height: 1024px;
     left: 576px;
     top: 0px;
-    background: #F6F7F9;
+    
+}
+
+#colunaDireita {
+    display:flex;
+    flex-direction: column;
+    position : absolute;
+
+  
+
 }
 
 .contador{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 50px
 }
 
 .cardContador{
@@ -92,4 +104,24 @@ div{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
 
+}
+
+.card{
+
+    display: flex;
+    flex-direction: column;
+    width: 802px;
+    height: 382px;
+    background: #FFFFFF;
+    border-radius: 16px;
+        
+
+}
+
+.cartao{
+    width: 900px;
+    margin-bottom:50px;
+    height: 300px;
+    border: 1px groove ;
+    
 }
