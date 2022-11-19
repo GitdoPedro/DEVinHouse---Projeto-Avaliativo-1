@@ -61,18 +61,26 @@ function carregaCard(cadastro) {
     const skill = criarElementosCard('p',`Linguagem/Skill: ${cadastro.linguagem}`)
     const categoria = criarElementosCard('p',`Categoria:   ${cadastro.categoria}`)
     const descricao = criarElementosCard('p',cadastro.descricao)
-    if (cadastro.url) {const url = criarElementosCard('button')}
+    const editar   = criarElementosCard('button','EDITAR')
+    const excluir   = criarElementosCard('button','EXCLUIR')
+    if (cadastro.url) {
+        const url = criarElementosCard('button','URL')
+        botoes.appendChild(url)
+    }
     
-        
+    botoes.appendChild(editar)
+    botoes.appendChild(excluir)        
     dados.appendChild(titulo)
     dados.appendChild(skill)
     dados.appendChild(categoria)
     dados.appendChild(descricao)
+    dados.appendChild(botoes)
     container.appendChild(dados)
     li.appendChild(container)
     card.appendChild(li)
+    
 
-    console.log(card)
+    
 
     
 }
@@ -103,6 +111,8 @@ frm.btSalvar.addEventListener("click", () => {
 
     cadastroDedicas.push(cadastroTemporario)
     carregaCard(cadastroTemporario)
+   // console.log(JSON.stringify(cadastroTemporario))
+    console.log(cadastroTemporario)
 
 
 })

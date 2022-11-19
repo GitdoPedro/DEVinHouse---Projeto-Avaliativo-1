@@ -18,7 +18,8 @@ main {
 p,
 label,
 input,
-select {
+select,
+button {
   padding: 8px;
   color: #000;
  
@@ -32,9 +33,13 @@ textarea{
     resize: none;
 }
 
-input,textarea,select{
+input,textarea,select,button{
     border-style: solid;
     border-width: 1px;
+}
+
+button{
+    background-color: aquamarine;
 }
 
 h4{
@@ -66,6 +71,7 @@ fieldset {
     padding: 20px;
     background-color:aquamarine;
     margin-top: 45px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
  
 }
 
@@ -122,6 +128,17 @@ div{
     width: 900px;
     margin-bottom:50px;
     height: 300px;
-    border: 1px groove ;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     
+}
+
+
+.botoesCard {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+h2{
+    text-align: center;
 }
