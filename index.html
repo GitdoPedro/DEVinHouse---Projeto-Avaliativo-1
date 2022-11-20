@@ -17,10 +17,10 @@
                 
 
                 <label for="inTitulo"><strong>Título</strong></label>
-                <input type="text" id="inTitulo" required minlength="8" maxlength="64" placeholder="Digite aqui um título" value="Grid vs Flex-Box">
+                <input type="text" id="inTitulo"  minlength="8" maxlength="64" required placeholder="Digite aqui um título" value="Grid vs Flex-Box">
 
                 <label for="inSkill"><strong>Linguagem/Skill</strong></label>
-                <input type="text" id="inSkill" required minlength="2" maxlength="16" placeholder="Digite uma linguagem ou skill" value="CSS">
+                <input type="text" id="inSkill"  minlength="2" maxlength="16" required placeholder="Digite uma linguagem ou skill" value="CSS">
 
                 <label for="InCategoria"><Strong>Categoria</Strong></label>
                 <select id="InCategoria">
@@ -34,10 +34,10 @@
                 <textarea  id="inDescricao" required minlength="16" maxlength="512" placeholder="Escreva aqui o detalhamento da sua dica..." rows="8" cols="50" >A diferença crucial entre flexbox e grid, além do primeiro ser unidimensional e o outro ser bi-dimensional, é que o controle do layout no grid vem do container e no flexbox vem dos elementos. A diferença crucial entre flexbox e grid, além do primeiro ser unidimensional e o outro ser bi-dimensional, é que o controle do layout no grid vem do container e no flexbox vem dos elementos. A diferença crucial entre flexbox e grid, além do primeiro ser unidimensional e o outro ser bi-dimensional, é que o controle do.</textarea>
 
                 <label for="inUrl"><strong>Vídeo do YouTube</strong></label>
-                <input type="text" id="inUrl"  placeholder="https://suaurl.com" pattern="https://.*" value="Teste">
+                <input type="text" id="inUrl"  placeholder="https://suaurl.com (CAMPO OPCIONAL)" pattern="https://.*" value="Teste">
 
                 <p>
-                    <input type="button" value="Limpar" id="btLimpar">
+                    <input type="reset" value="Limpar" id="btLimpar">
                     <input type="button" value="Salvar" id="btSalvar">
                 </p>
             </fieldset>
@@ -47,7 +47,8 @@
         </div>
 
         <div id ="colunaDireita">
-          
+
+
             <ul class = "contador" >
                 <li class = "cardContador"><h4>Total</h4><p id = OutTotal>0</p></li>
                 <li class = "cardContador"><h4>FrontEnd</h4><p id = OutFrontEnd>0</p></li>
@@ -55,8 +56,12 @@
                 <li class = "cardContador"><h4>FullStack</h4><p id = OutFullStack>0</p></li>
                 <li class = "cardContador"><h4>Skill</h4><p id = OutSkill>0</p></li>
             </ul>
-
-            <ul id="card" class = "card"> </ul>
+            <div class = "div-pesquisa">
+                <input type = "text" id="pesquisa" placeholder="Pesquise aqui"> 
+                <button>Pesquisar</button>
+                <button>Limpar</button>
+            </div>
+                <ul id="card" class = "card"> </ul>
 
         </div>
 

@@ -2,9 +2,18 @@ import contadorCategoria from "./contador.js"
 import cadastroDicas    from "./cadastroDicas.js"
 const frm = document.querySelector('form') 
 const card = document.getElementById('card')
-card.innerHTML = ''
-const cadastroDedicas = []
+let cadastroDedicas = []
 const categorias = new contadorCategoria()
+
+
+function atualizaContador() {
+
+    document.querySelector("#OutTotal").innerText = categorias.total
+    document.querySelector("#OutFrontEnd").innerText = categorias.FrontEnd
+    document.querySelector("#OutBackEnd").innerText = categorias.BackEnd
+    document.querySelector("#OutFullStack").innerText = categorias.FullStack
+    document.querySelector("#OutSkill").innerText = categorias.SoftSkill
+}
 
 
 
@@ -41,79 +50,95 @@ const criarElementosCard = (tag, conteudo) =>{
     return elemento
 }
 
-function carregaCard(cadastro) {
-
+function removerElemento(itemId,categoria){
     
-
-    const li = document.createElement('li')
-    const container = document.createElement('div')
-    const dados = document.createElement('div')
-    const botoes = document.createElement('p')
-
-    li.classList.add('cartao')
-    container.classList.add('container')
-    dados.classList.add('dados')
-    botoes.classList.add('botoesCard')
-
-
-
-    const titulo = criarElementosCard('h2',cadastro.titulo)
-    const skill = criarElementosCard('p',`Linguagem/Skill: ${cadastro.linguagem}`)
-    const categoria = criarElementosCard('p',`Categoria:   ${cadastro.categoria}`)
-    const descricao = criarElementosCard('p',cadastro.descricao)
-    const editar   = criarElementosCard('button','EDITAR')
-    const excluir   = criarElementosCard('button','EXCLUIR')
-    if (cadastro.url) {
-        const url = criarElementosCard('button','URL')
-        botoes.appendChild(url)
-    }
+   
+    categorias.decresceContador(categoria)
+    atualizaContador()
+    cadastroDedicas = cadastroDedicas.filter(i => i.id !== itemId)
+    carregaCard()
     
-    botoes.appendChild(editar)
-    botoes.appendChild(excluir)        
-    dados.appendChild(titulo)
-    dados.appendChild(skill)
-    dados.appendChild(categoria)
-    dados.appendChild(descricao)
-    dados.appendChild(botoes)
-    container.appendChild(dados)
-    li.appendChild(container)
-    card.appendChild(li)
     
+    
+}
 
+function carregaCard() {
+
+    card.innerHTML = ''
+    cadastroDedicas.forEach(cadastro => {
+        
     
+        const li = document.createElement('li')
+        const container = document.createElement('div')
+        const dados = document.createElement('div')
+        const botoes = document.createElement('p')
+
+        li.classList.add('cartao')
+        container.classList.add('container')
+        dados.classList.add('dados')
+        botoes.classList.add('botoesCard')
+
+
+
+        const titulo = criarElementosCard('h2',cadastro.titulo)
+        const skill = criarElementosCard('p',`Linguagem/Skill: ${cadastro.linguagem}`)
+        const categoria = criarElementosCard('p',`Categoria:   ${cadastro.categoria}`)
+        const descricao = criarElementosCard('p',cadastro.descricao)
+        const editar   = criarElementosCard('button','EDITAR')
+        const excluir   = criarElementosCard('button','EXCLUIR')
+        excluir.addEventListener('click', () => removerElemento (cadastro.id,cadastro.categoria) )
+        if (cadastro.url) {
+            const url = criarElementosCard('button','URL')
+            botoes.appendChild(url)
+        }
+        
+        botoes.appendChild(editar)
+        botoes.appendChild(excluir)        
+        dados.appendChild(titulo)
+        dados.appendChild(skill)
+        dados.appendChild(categoria)
+        dados.appendChild(descricao)
+        dados.appendChild(botoes)
+        container.appendChild(dados)
+        li.appendChild(container)
+        card.appendChild(li)
+        
+
+});
+
 
     
 }
 
 frm.btSalvar.addEventListener("click", () => {
 
-    const titulo    = frm.inTitulo.value
-    const skill     = frm.inSkill.value
-    const categoria = Number(document.querySelector('option:checked').value)
-    const descricao = frm.inDescricao.value
-    const url       = validaURLYoutube(frm.inUrl.value)? frm.inUrl.value : null
-    url == null ? alert("Cadastro efetuado sem url") : alert("Cadastro efetuado com sucesso!") 
-    categorias.incrementaContador(categoria)
     
-    
-    
-    //Atualiza o contador
+    if (frm.inTitulo.value != '' && frm.inSkill.value != '' ){
+        const titulo    = frm.inTitulo.value
+        const skill     = frm.inSkill.value
+        const categoria = selecionaCategoria(Number(document.querySelector('option:checked').value))
+        const descricao = frm.inDescricao.value
+        const url       = validaURLYoutube(frm.inUrl.value)? frm.inUrl.value : null
+        url == null ? alert("Cadastro efetuado sem url") : alert("Cadastro efetuado com sucesso!") 
+        categorias.incrementaContador(categoria)
+        atualizaContador()
+        
+        //Atualiza o contador
 
-    document.querySelector("#OutTotal").innerText = categorias.total
-    document.querySelector("#OutFrontEnd").innerText = categorias.FrontEnd
-    document.querySelector("#OutBackEnd").innerText = categorias.BackEnd
-    document.querySelector("#OutFullStack").innerText = categorias.FullStack
-    document.querySelector("#OutSkill").innerText = categorias.SoftSkill
 
-    //Adiciona elemento ao array de cadastros
+        //Adiciona elemento ao array de cadastros
 
-    let cadastroTemporario = new cadastroDicas(titulo,skill,selecionaCategoria(categoria),descricao,url)
-
-    cadastroDedicas.push(cadastroTemporario)
-    carregaCard(cadastroTemporario)
+        cadastroDedicas.push(new cadastroDicas(titulo,skill,categoria,descricao,url))
+        
+        carregaCard()
+}   else{
+        alert('Preencha os campos obrigatórios!')
+}
    // console.log(JSON.stringify(cadastroTemporario))
-    console.log(cadastroTemporario)
+    
 
 
 })
+
+
 
