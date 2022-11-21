@@ -5,7 +5,7 @@ export default class cadastroDicas  {
     this.categoria    = categoria,
     this.descricao    = descricao,
     this.url          = url
-    this.id           = Number(new Date())
+    this.id           = Date.now()
     
 }
 

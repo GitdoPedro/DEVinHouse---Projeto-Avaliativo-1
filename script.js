@@ -3,7 +3,15 @@ import cadastroDicas    from "./cadastroDicas.js"
 const frm = document.querySelector('form') 
 const card = document.getElementById('card')
 let cadastroDedicas = []
+const dadosJson = localStorage.getItem('chave-dados')
+if (dadosJson) {cadastroDedicas = JSON.parse(dadosJson)}
 const categorias = new contadorCategoria()
+
+
+frm.btLimpar.addEventListener("click", () => {
+    frm.reset()
+
+})
 
 
 function atualizaContador() {
@@ -52,15 +60,24 @@ const criarElementosCard = (tag, conteudo) =>{
 
 function removerElemento(itemId,categoria){
     
-   
-    categorias.decresceContador(categoria)
-    atualizaContador()
-    cadastroDedicas = cadastroDedicas.filter(i => i.id !== itemId)
-    carregaCard()
+    if (confirm('Deseja confirmar a exclusão?')) {
+        categorias.decresceContador(categoria)
+        atualizaContador()
+        cadastroDedicas = cadastroDedicas.filter(i => i.id !== itemId)
+        carregaCard()
+        salvarDadosLocalStorage()
+    }
     
     
     
 }
+
+
+function salvarDadosLocalStorage(){
+    const dadosJson = JSON.stringify(cadastroDedicas)
+    localStorage.setItem('chave-dados',dadosJson)
+}
+
 
 function carregaCard() {
 
@@ -112,7 +129,8 @@ function carregaCard() {
 
 frm.btSalvar.addEventListener("click", () => {
 
-    
+
+        
     if (frm.inTitulo.value != '' && frm.inSkill.value != '' ){
         const titulo    = frm.inTitulo.value
         const skill     = frm.inSkill.value
@@ -130,7 +148,9 @@ frm.btSalvar.addEventListener("click", () => {
 
         cadastroDedicas.push(new cadastroDicas(titulo,skill,categoria,descricao,url))
         
+        
         carregaCard()
+        salvarDadosLocalStorage()
 }   else{
         alert('Preencha os campos obrigatórios!')
 }
@@ -139,6 +159,5 @@ frm.btSalvar.addEventListener("click", () => {
 
 
 })
-
 
 
