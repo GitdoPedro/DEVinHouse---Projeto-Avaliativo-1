@@ -2,10 +2,16 @@ import contadorCategoria from "./contador.js"
 import cadastroDicas    from "./cadastroDicas.js"
 const frm = document.querySelector('form') 
 const card = document.getElementById('card')
+const pesquisa = document.getElementById('pesquisa')
+const btnPesquisa = document.getElementById('btnPesquisa')
+const btnLimparPesquisa = document.getElementById('btnLimparPesquisa')
 let cadastroDedicas = []
+let termoPesquisa = ""
+localStorage.clear();
 const dadosJson = localStorage.getItem('chave-dados')
 if (dadosJson) {cadastroDedicas = JSON.parse(dadosJson)}
 const categorias = new contadorCategoria()
+
 
 
 frm.btLimpar.addEventListener("click", () => {
@@ -58,6 +64,8 @@ const criarElementosCard = (tag, conteudo) =>{
     return elemento
 }
 
+
+
 function removerElemento(itemId,categoria){
     
     if (confirm('Deseja confirmar a exclusão?')) {
@@ -82,7 +90,12 @@ function salvarDadosLocalStorage(){
 function carregaCard() {
 
     card.innerHTML = ''
-    cadastroDedicas.forEach(cadastro => {
+    cadastroDedicas
+        const termoPesquisado = cadastroDedicas.filter(item =>{
+            return item.titulo.toLowerCase().includes(termoPesquisa)
+        })
+        console.log(termoPesquisado)
+        termoPesquisado.forEach(cadastro => {
         
     
         const li = document.createElement('li')
@@ -161,3 +174,18 @@ frm.btSalvar.addEventListener("click", () => {
 })
 
 
+function pesquisaResultado(){
+    termoPesquisa = pesquisa.value.toLowerCase()
+    carregaCard()
+
+}
+
+function limparPesquisa(){
+    pesquisa.value = ""
+    termoPesquisa = ""
+    carregaCard()
+
+}
+
+btnPesquisa.addEventListener('click',pesquisaResultado)
+btnLimparPesquisa.addEventListener('click',limparPesquisa)
