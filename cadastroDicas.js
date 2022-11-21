@@ -7,6 +7,7 @@ export default class cadastroDicas  {
     this.url          = url
     this.id           = Date.now()
     
+    
 }
 
 

@@ -31,19 +31,19 @@ export default class contadorCategoria  {
         switch(categoria) {
             case 'FrontEnd':
                 this.FrontEnd-=1
-                console.log(this.FrontEnd)
+                
                 break
             case 'BackEnd':
                 this.BackEnd-=1
-                console.log(categoria)
+                
                 break
             case 'FullStack':
                 this.FullStack-=1
-                console.log(categoria)
+                
                 break
             case 'SoftSkill':
                 this.SoftSkill-=1
-                console.log(categoria)
+                
                 break
           }
 
