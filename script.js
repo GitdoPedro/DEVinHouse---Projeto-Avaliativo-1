@@ -87,8 +87,6 @@ function editarElemento(item){
         document.getElementById('inSkill').value = elemento.linguagem
         document.getElementById('inDescricao').value = elemento.descricao
         document.getElementById('inUrl').value = elemento.url
-        categorias.decresceContador(selecionaCategoria(Number(document.querySelector('option:checked').value)))
-        atualizaContador()
         emEdicao = elemento
     }
 
@@ -207,8 +205,6 @@ frm.btSalvar.addEventListener("click", (e) => {
             
             }else{
                 cadastroDedicas.push(new cadastroDicas(titulo,skill,categoria,descricao,url))
-                categorias.incrementaContador(categoria)
-                atualizaContador()
                 carregaCard()
                 salvarDadosLocalStorage()
   
